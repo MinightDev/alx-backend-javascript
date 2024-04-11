@@ -1,99 +1,28 @@
-import Currency from './3-currency';
-
-export default class Pricing {
-  constructor(amount, currency) {
-    this.amount = amount;
-    this.currency = currency;
-  }
-
-  get amount() {
-    return this._amount;
-  }
-
-  set amount(value) {
-    if (typeof value !== 'number') {
-      throw new TypeError('amount must be a number');
+class Building {
+  constructor(sqft) {
+    if (this.constructor !== Building) {
+      if (typeof this.evacuationWarningMessage !== 'function') {
+        throw new Error(
+          'Class extending Building must override evacuationWarningMessage',
+        );
+      }
     }
-    this._amount = value;
+    this.sqft = sqft;
   }
 
   /**
-   * @returns {Currency}
+   * @param {Number} sqft
    */
-  get currency() {
-    return this._currency;
-  }
-
-  /**
-   * @param {Currency} value
-   */
-  set currency(value) {
-    if (!(value instanceof Currency)) {
-      throw new TypeError('currency must be a Currency');
+  set sqft(sqft) {
+    if (typeof sqft !== 'number') {
+      throw new TypeError('sqft nust be a number');
     }
-    this._currency = value;
+    this._sqft = sqft;
   }
 
-  displayFullPrice() {
-    return `${this.amount} ${this.currency.name} (${this.currency.code})`;
+  get sqft() {
+    return this._sqft;
   }
+}
 
-  static convertPrice(amount, conversionRate) {
-    if (typeof amount !== 'number') {
-      throw new TypeError('amount must be a number');
-    }
-    if (typeof conversionRate !== 'number') {
-      throw new TypeError('conversionRate must be a number');
-    }
-    return amount * conversionRate;
-  }
-import Currency from './3-currency';
-
-export default class Pricing {
-  constructor(amount, currency) {
-    this.amount = amount;
-    this.currency = currency;
-  }
-
-  get amount() {
-    return this._amount;
-  }
-
-  set amount(value) {
-    if (typeof value !== 'number') {
-      throw new TypeError('amount must be a number');
-    }
-    this._amount = value;
-  }
-
-  /**
-   * @returns {Currency}
-   */
-  get currency() {
-    return this._currency;
-  }
-
-  /**
-   * @param {Currency} value
-   */
-  set currency(value) {
-    if (!(value instanceof Currency)) {
-      throw new TypeError('currency must be a Currency');
-    }
-    this._currency = value;
-  }
-
-  displayFullPrice() {
-    return `${this.amount} ${this.currency.name} (${this.currency.code})`;
-  }
-
-  static convertPrice(amount, conversionRate) {
-    if (typeof amount !== 'number') {
-      throw new TypeError('amount must be a number');
-    }
-    if (typeof conversionRate !== 'number') {
-      throw new TypeError('conversionRate must be a number');
-    }
-    return amount * conversionRate;
-  }
-}}
+export default Building;
